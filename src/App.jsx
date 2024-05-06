@@ -1,13 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Error from "./pages/Error"
 
+// components
+import Intro from "./components/Intro"
+
 // library imports
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 // Layouts
 import Main, { mainLoader } from "./layouts/Main"
-import Dashboard, { dashBoardLoader } from "./pages/Dashboard"
+import Dashboard, { dashBoardLoader, dashboardAction } from "./pages/Dashboard"
 
 // Actions
 import { logoutAction } from "./action/logout"
@@ -21,9 +24,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <p>dashboard</p>,
-        // loader: dashBoardLoader,
-        // errorElement: <Error />,
+        element: <Dashboard />,
+        loader: dashBoardLoader,
+        action: dashboardAction,
+        errorElement: <Error />,
       },
       {
         path: "logout",
@@ -31,10 +35,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "*", // trigger when path not exist
-  //   element: <Error />,
-  // },
+  {
+    path: "*", // trigger when path not exist
+    element: <Error />,
+  },
 ])
 
 function App() {
