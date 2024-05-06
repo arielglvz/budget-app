@@ -5,6 +5,9 @@ import Error from "./pages/Error"
 import Main, { mainLoader } from "./layouts/Main"
 import Dashboard, { dashBoardLoader } from "./pages/Dashboard"
 
+// Actions
+import { logoutAction } from "./action/logout"
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,9 +17,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Yoq</h1>,
+        element: <p>dashboard</p>,
         // loader: dashBoardLoader,
         // errorElement: <Error />,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
       },
     ],
   },
