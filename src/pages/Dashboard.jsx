@@ -23,12 +23,27 @@ export function dashBoardLoader() {
 //  Action
 export async function dashboardAction({ request }) {
   const data = await request.formData()
-  const formData = Object.fromEntries(data)
-  try {
-    localStorage.setItem("userName", JSON.stringify(formData.userName))
-    return toast.success(`Welcome, ${formData.userName}`)
-  } catch (e) {
-    throw new Error("There was a problem creating you account.")
+  const { _action, ...values } = Object.fromEntries(data)
+  console.log(_action)
+
+  // newUser submission
+  if (_action === "newUser") {
+    try {
+      localStorage.setItem("userName", JSON.stringify(values.userName))
+      return toast.success(`Welcome, ${values.userName}`)
+    } catch (e) {
+      throw new Error("There was a problem creating you account.")
+    }
+  }
+
+  if (_action === "createBudget") {
+    try {
+      throw new Error("You failed")
+      // create budget
+      return toast.success("Budget Created!")
+    } catch (e) {
+      throw new Error("There was a problem creating you bude")
+    }
   }
 }
 
